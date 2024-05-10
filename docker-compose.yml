@@ -1,0 +1,78 @@
+version: '3'
+
+name: 'srv'
+
+volumes:
+  portainer_data:
+  postgres:
+  nginx_proxy:
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    restart: unless-stopped
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '9000:9000'
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    cap_add:
+      - NET_RAW
+      - SETUID
+
+  autoheal:
+    image: willfarrell/autoheal:latest
+    environment:
+      AUTOHEAL_CONTAINER_LABEL: all
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  nginx:
+    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - nginx_proxy:/data
+      - nginx_proxy:/etc/letsencrypt
+
+  dozzle:
+    container_name: dozzle
+    restart: unless-stopped
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+
+  redis:
+    restart: unless-stopped
+    image: redis
+  
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - postgres:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - PGUSER=postgres
+      - PGPORT=${CONFIG_POSTGRESQL_PORT:-5432}
+      - POSTGRES_DB=${CONFIG_POSTGRESQL_NAME:-postgres}
+      - POSTGRES_PASSWORD=${CONFIG_POSTGRESQL_PASSWORD:-postgres}
+      - POSTGRES_USER=${CONFIG_POSTGRESQL_USER:-postgres}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 3
