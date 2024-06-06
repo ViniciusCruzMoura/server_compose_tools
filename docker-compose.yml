@@ -86,3 +86,15 @@ services:
       interval: 1m30s
       timeout: 30s
       retries: 3
+
+  socket-proxy:
+    restart: unless-stopped
+    image: tecnativa/docker-socket-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9008:2375
+    environment:
+      - CONTAINERS=1
+      - INFO=1
+    privileged: true
