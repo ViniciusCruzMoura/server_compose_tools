@@ -53,6 +53,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 9999:8080
+    environment:
+      DOZZLE_HOSTNAME: logs
+    healthcheck:
+      test: ["CMD", "/dozzle", "healthcheck"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
 
   redis:
     restart: unless-stopped
