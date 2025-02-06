@@ -3,6 +3,7 @@ volumes:
   portainer_data:
 services:
   portainer:
+    container_name: portainer
     image: portainer/portainer-ce:latest
     restart: unless-stopped
     volumes:
