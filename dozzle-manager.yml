@@ -1,0 +1,19 @@
+name: 'srv'
+services:
+  dozzle:
+    container_name: dozzle
+    restart: always
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9009:8080
+    environment:
+      DOZZLE_HOSTNAME: 10.111.17.41
+      DOZZLE_REMOTE_AGENT: 10.111.17.42:9008 #,172.16.85.43:9008
+    healthcheck:
+      test: ["CMD", "/dozzle", "healthcheck"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
