@@ -1,0 +1,23 @@
+volumes:
+  jenkins_home:
+services:
+  jenkins-agent:
+    restart: always
+    image: jenkins/inbound-agent:jdk17
+    privileged: true
+    init: true
+    user: root
+    environment:
+      - JENKINS_URL=http://10.111.17.41:8080
+      - JENKINS_SECRET=XXXXXXXX
+      - JENKINS_AGENT_NAME=10.111.17.41
+      - JENKINS_AGENT_WORKDIR="/var/jenkins_home"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_home:/var/jenkins_home
+      - /usr/bin/docker:/usr/bin/docker
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
