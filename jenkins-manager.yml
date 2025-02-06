@@ -1,0 +1,21 @@
+volumes:
+  jenkins_home:
+services:
+  jenkins:
+    container_name: jenkins_manager
+    restart: always
+    image: jenkins/jenkins:lts
+    privileged: true
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_home:/var/jenkins_home
+      - /usr/bin/docker:/usr/bin/docker
+    deploy:
+      resources:
+        limits:
+          cpus: '1.50'
+          memory: 2048M
