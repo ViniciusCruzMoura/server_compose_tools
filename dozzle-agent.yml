@@ -2,6 +2,7 @@ name: 'srv'
 services:
   dozzle-agent:
     container_name: dozzle-agent
+    restart: unless-stopped
     image: amir20/dozzle:latest
     command: agent
     healthcheck:
