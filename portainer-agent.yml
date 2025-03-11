@@ -1,0 +1,10 @@
+name: 'srv'
+services:
+  portainer:
+    container_name: portainer_agent
+    image: portainer/agent:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '9001:9001'
