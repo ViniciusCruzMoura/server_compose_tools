@@ -2,7 +2,7 @@ volumes:
   jenkins_home:
 services:
   jenkins:
-    container_name: jenkins_manager
+    container_name: jenkins
     restart: always
     image: jenkins/jenkins:lts
     privileged: true
