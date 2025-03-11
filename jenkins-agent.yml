@@ -3,6 +3,7 @@ volumes:
 services:
   jenkins-agent:
     restart: always
+    container_name: jenkins_agent
     image: jenkins/inbound-agent:jdk17
     privileged: true
     init: true
