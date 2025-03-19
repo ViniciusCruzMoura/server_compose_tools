@@ -1,7 +1,7 @@
 volumes:
   nginx_proxy:
 services:
-  nginx-proxy-manager:
+  nginx:
     container_name: nginx-proxy-manager
     image: 'docker.io/jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
@@ -12,3 +12,14 @@ services:
     volumes:
       - nginx_proxy:/data
       - nginx_proxy:/etc/letsencrypt
+  logs:
+    container_name: nginx-proxy-logs
+    image: busybox:latest
+    restart: unless-stopped
+    volumes:
+      - nginx_proxy:/data
+    command:
+      - sh 
+      - -c 
+      - "/data/logs/*.log"
+    network_mode: none
