@@ -1,0 +1,21 @@
+volumes:
+  gitlab_data_etc:
+  gitlab_data_log:
+  gitlab_data_opt:
+name: 'srv'
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    ports:
+      - "8888:80"
+    volumes:
+      - gitlab_data_etc:/etc/gitlab
+      - gitlab_data_log:/var/log/gitlab
+      - gitlab_data_opt:/var/opt/gitlab
+    deploy:
+      resources:
+        limits:
+          cpus: '1.50'
+          memory: 2048M
