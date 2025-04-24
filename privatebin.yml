@@ -1,0 +1,13 @@
+volumes:
+  privatebin_data:
+services:
+  privatebin:
+    container_name: privatebin
+    image: privatebin/nginx-fpm-alpine
+    restart: always
+    read_only: true
+    ports:
+      - "8082:8080"
+    volumes:
+      - privatebin_data:/srv/data
+      #- ./privatebin-data:/srv/data
