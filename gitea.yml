@@ -17,6 +17,7 @@ services:
       - GITEA__database__NAME=postgres
       - GITEA__database__USER=postgres
       - GITEA__database__PASSWD=postgres
+      - GITEA__server__ROOT_URL=http://127.0.0.1:3000
     volumes:
       - gitea-data:/var/lib/gitea
       - gitea-config:/etc/gitea
