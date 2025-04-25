@@ -1,6 +1,6 @@
 volumes:
-  gitea-data:
-  gitea-config:
+  gitea_data:
+  gitea_config:
   postgres:
 name: 'srv'
 services:
@@ -19,8 +19,8 @@ services:
       - GITEA__database__PASSWD=postgres
       - GITEA__server__ROOT_URL=http://127.0.0.1:3000
     volumes:
-      - gitea-data:/var/lib/gitea
-      - gitea-config:/etc/gitea
+      - gitea_data:/var/lib/gitea
+      - gitea_config:/etc/gitea
     deploy:
       resources:
         limits:
