@@ -1,5 +1,7 @@
 volumes:
-  nginx_proxy:
+  nginx_data:
+  nginx_ssl:
+name: 'srv'
 services:
   nginx:
     container_name: nginx-proxy-manager
@@ -10,14 +12,14 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - nginx_proxy:/data
-      - nginx_proxy:/etc/letsencrypt
+      - nginx_data:/data
+      - nginx_ssl:/etc/letsencrypt
   logs:
     container_name: nginx-proxy-logs
     image: busybox:latest
     restart: unless-stopped
     volumes:
-      - nginx_proxy:/data
+      - nginx_data:/data
     command:
       - sh 
       - -c 
