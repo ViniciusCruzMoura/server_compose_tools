@@ -1,5 +1,6 @@
 volumes:
   jenkins_home:
+name: 'srv'
 services:
   jenkins-agent:
     restart: always
