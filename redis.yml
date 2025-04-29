@@ -1,5 +1,6 @@
 volumes:
   redis_data:
+name: 'srv'
 services:
   redis:
     container_name: redis
