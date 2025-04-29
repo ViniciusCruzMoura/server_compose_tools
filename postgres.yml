@@ -1,5 +1,5 @@
 volumes:
-  postgres:
+  postgres_data:
 name: 'srv'
 services:
   postgres:
@@ -7,7 +7,7 @@ services:
     image: postgres
     restart: unless-stopped
     volumes:
-      - postgres:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
     ports:
       - 5432:5432
     environment:
