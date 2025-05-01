@@ -5,8 +5,8 @@ name: 'srv'
 services:
   oracle:
     container_name: oracle
-    #image: container-registry.oracle.com/database/free:latest
-    image: container-registry.oracle.com/database/express:latest
+    #image: container-registry.oracle.com/database/free:latest # It supports up to 2 CPUs and 20 GB of user data
+    image: container-registry.oracle.com/database/express:latest # a maximum of 2 GB of user data and a limit of CPUs
     environment:
       - ORACLE_SID=XE #FREE
       #- ORACLE_PDB=XEPDB1 # ORCLPDB1
