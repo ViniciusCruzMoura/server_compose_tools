@@ -1,0 +1,17 @@
+volumes:
+  dockovpn_data:
+name: 'srv'
+services:
+  dockovpn:
+    container_name: dockovpn
+    image: alekslitvinenk/openvpn
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "1194:1194/udp"
+      - "80:8080/tcp"
+    environment:
+      - HOST_ADDR=${HOST_ADDR:-$(curl -s https://api.ipify.org)}
+    volumes:
+        - dockovpn_data:/opt/Dockovpn_data
