@@ -1,6 +1,6 @@
 volumes:
   dockovpn_data:
-name: 'srv'
+name: 'vpn'
 services:
   dockovpn:
     container_name: dockovpn
