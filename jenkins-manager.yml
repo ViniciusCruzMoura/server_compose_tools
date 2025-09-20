@@ -5,7 +5,7 @@ services:
   jenkins:
     container_name: jenkins
     restart: always
-    image: jenkins/jenkins:lts-jdk17
+    image: jenkins/jenkins:lts-jdk21
     privileged: true
     user: root
     ports:
@@ -15,9 +15,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - jenkins_home:/var/jenkins_home
       - /usr/bin/docker:/usr/bin/docker
-      - /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose
-      - /usr/lib/docker/cli-plugins/docker-compose:/usr/lib/docker/cli-plugins/docker-compose
-      - /usr/bin/docker-compose:/usr/bin/docker-compose
+      - /usr/libexec/docker/cli-plugins/docker-compose:/usr/libexec/docker/cli-plugins/docker-compose # ubuntu
+      - /usr/lib/docker/cli-plugins/docker-compose:/usr/lib/docker/cli-plugins/docker-compose # arch
+      - /usr/bin/docker-compose:/usr/bin/docker-compose # arch
     deploy:
       resources:
         limits:
