@@ -14,6 +14,11 @@ services:
     volumes:
       - nginx_data:/data
       - nginx_ssl:/etc/letsencrypt
+    deploy:
+      resources:
+        limits:
+          cpus: '0.85'
+          memory: 128M
   logs:
     container_name: nginx-proxy-logs
     image: busybox:latest
@@ -25,3 +30,8 @@ services:
       - -c 
       - "tail -f /data/logs/*.log"
     network_mode: none
+    deploy:
+      resources:
+        limits:
+          cpus: '0.15'
+          memory: 32M
