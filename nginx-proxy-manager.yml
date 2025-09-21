@@ -23,5 +23,5 @@ services:
     command:
       - sh 
       - -c 
-      - "/data/logs/*.log"
+      - "tail -f /data/logs/*.log"
     network_mode: none
