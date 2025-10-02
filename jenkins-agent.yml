@@ -5,7 +5,7 @@ services:
   jenkins-agent:
     restart: always
     container_name: jenkins_agent
-    image: jenkins/inbound-agent:jdk17
+    image: jenkins/inbound-agent:jdk21
     privileged: true
     init: true
     user: root
